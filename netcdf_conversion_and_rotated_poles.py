@@ -7,7 +7,8 @@ from netCDF4 import Dataset
 
 ddir="/home/d01/msun/cylc-run/u-da799/share/cycle/20180811T1200Z/Regn123/resn_1/RAL3p2_504p4/um/"
 fn="umnsaa_px.pp"
-outfn='test.nc'
+outfn=fn.replace('.pp','.nc')
+
 
 
 data=iris.load(ddir+fn)
