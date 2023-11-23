@@ -8,7 +8,6 @@ ddir="/home/d01/msun/cylc-run/u-da799/share/cycle/20180811T1200Z/Regn123/resn_1/
 fn="umnsaa_px.pp"
 outfn='test.nc'
 
-
 data=iris.load(ddir+fn)
 iris.save(data,outfn)
 
