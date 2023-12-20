@@ -12,6 +12,8 @@ import iris
 import iris.plot as iplt
 import iris.quickplot as qplt
 from iris.analysis.cartography import unrotate_pole
+import datetime
+
 
 level = iris.Constraint(name='radar_reflectivity_due_to_all_hydrometeor_species',model_level_number=37)
 cube = iris.load_cube("/gws/nopw/j04/dcmex/users/msun/darwin-small/20051130T1200Z_Darwin_km1p5_RAL3p2_504p4_p2.pp",level)
@@ -105,7 +107,9 @@ def main():
 
 	#plt.show()
 	  #plt.savefig('./myfig.png')
-	  plt.savefig("/home/users/msun/darwin-small/" + str(time.points[i]) + ".png")
+	  tStamp=datetime.datetime.fromtimestamp(time.points[i]*3600).strftime('%Y-%m-%d %H:%M:%S')
+	  tStamp=tStamp.replace(' ','_').replace(':','_')
+	  plt.savefig("/home/users/msun/darwin-small/" + tStamp + ".png")
 	  plt.close()
 
 if __name__ == "__main__":
