@@ -44,7 +44,7 @@ lons, lats = unrotate_pole(rlons, rlats, pole_lon, pole_lat)
 #lons = np.array(lons[0])
 #lats = np.array(lats[0])
 lats = np.array(lats[0:900,0])  #转换为正确的经/纬度，作为剖面图的横坐标
-lons = np.array(lons[0,0:900])
+lons = np.array(lons[500,0:900])
 #垂直剖面的起始经纬度
 #cross_start = CoordPair(lat=-13.8,lon=131.1)
 #cross_end   = CoordPair(lat=-13.7,lon=132.2)
@@ -56,9 +56,9 @@ lons = np.array(lons[0,0:900])
 # Extract a single height vs longitude cross-section. 
 #cross_section = next(cube.slices(["grid_longitude", "model_level_number"]))
 #cross_section = next(cube.slices(["grid_latitude", "level_height"]))   #latitude
-cross_section = next(cube[15,:,438,:].slices(["grid_longitude", "level_height"]))   #longitude  ,time=32, lat=342(grid_lat),lons=390:815(不能这样设置，必须与grid_longitude长度一致)
+cross_section = next(cube[16,:,510,:].slices(["level_height", "grid_longitude"]))   #longitude  ,time=32, lat=342(grid_lat),lons=390:815(不能这样设置，必须与grid_longitude长度一致)
 #print(cross_section) #radar_reflectivity_due_to_all_hydrometeor_species / (dBZ) (grid_longitude: 900; model_level_number: 80)
-cross_section_1 = np.transpose(np.array(cross_section.data))  #矩阵转置
+cross_section_1 = np.array(cross_section.data)  #矩阵转置
 
 fig = plt.figure()
 
@@ -71,7 +71,8 @@ dbz = ax.contourf(lons,heights,cross_section_1,levels=dbz_range,cmap="Spectral_r
 #dbz = ax.contourf(lats,heights,cross_section_1,cmap="Spectral_r")   #latitude
 #ax.set_extent([180, 186, 0, 80],)
 #ax.set_xticks([182, 184, 186, 188])
-
+plt.xlim((129.8,131.5))
+plt.ylim((0,20000))
 cbar = fig.colorbar(dbz)
 #plt.xlabel('latitude')
 plt.xlabel('longitude')
