@@ -46,21 +46,21 @@ if __name__=="__main__":
 
 	# create an empty array to store values
 	array = np.zeros((cube.shape[0],70))
-	
+	y = np.zeros((70))	
 	# loop over all heights
 	for i in range(70):
 		print('height level ' + str(i+1) + ' of ' + str(70))
  
 		level = iris.Constraint(name='radar_reflectivity_due_to_all_hydrometeor_species',model_level_number=(i+1))
 		cube = iris.load_cube("/gws/nopw/j04/dcmex/users/msun/darwin-small/20051130T1200Z_Darwin_km1p5_RAL3p2_504p4_p2.pp",level)
-		
+		y[i] = cube[0].aux_coords[3].points
 		for j in range(cube.shape[0]):
 			dat=cube.data[j,:,:].flatten()	
 			ind,=np.where(dat > 10)
 			array[j,i]=len(ind) / len(dat)
 
 	plt.ion()
-	plt.pcolormesh(time.points,cube[0].aux_coords[3].points, array.T)
+	plt.pcolormesh(time.points,y, array.T)
 	plt.clim((0,1))
 	plt.colorbar()
 	plt.xlabel('time')
