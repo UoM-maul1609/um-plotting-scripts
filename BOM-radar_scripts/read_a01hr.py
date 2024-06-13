@@ -6,7 +6,7 @@ import datetime
 
 def read_file(fileName='/Volumes/Database3/' + \
 	'ACTIVE/PROCESSED/current/BOM-RADAR/' + \
-	'a01hr/20051130/a01hr_20051130.06_e0.51_rbKZ.ascii'):
+	'a01hr/20051201/a01hr_20051201.06_e0.51_rbKZ.ascii'):
 
 	# dictionary to hold data
 	data1=dict()
@@ -75,7 +75,7 @@ if __name__=="__main__":
 		resolution='i')	
 	m.drawcoastlines()
 	xx,yy=m(data['lon'],data['lat'])
-	m.contourf(xx,yy,data['precip_accum'])
+	m.contourf(xx,yy,data['precip_accum'],[0,2.5,5,10,12.5,15,17.5,20,22.5,25,27.5,30])
+	plt.clim((0,30))
 # 	plt.axis('equal')
 	cbar=m.colorbar()
-# 	plt.clim((0,60))
